@@ -1,19 +1,31 @@
 // 2nd and best approach in which we write code in a other file and import here 
 //require("dotenv").config({path:'./env'})
-
-import dotenv from "dotenv"
+//--experimental-json-module
 // import mongoose from "mongoose";
 // import { DB_NAME } from "./constants.js";
+
+import dotenv from "dotenv"
+
 import connectDB from "./db/db.js";
 
 dotenv.config({
     path:'./env'
 })
 
-connectDB;
+connectDB
+
+.then(()=>{
+    app.listen(process.env.PORT||8000,()=>
+    {
+        console.log(`server is running at port :${process.env.PORT}`)
+    })
+})
+.catch((error)=>{
+    console.log("MOngodb conncetion failed !!!",error);
+})
 
 
-//--experimental-json-module
+
 
 
 
